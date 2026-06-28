@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Untuk Kamu ❤️</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Google Fonts: Playfair Display untuk judul elegan, Lato untuk body -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap"
+        rel="stylesheet" />
+</head>
+
+<body>
+
+    <!-- =============================================
+       FLOATING HEARTS (background decoration)
+       Digenerate via JavaScript di script.js
+  ============================================= -->
+    <div id="floating-hearts-container"></div>
+
+    <!-- =============================================
+       HALAMAN 1 — Welcome & Password
+  ============================================= -->
+    <section id="page-1" class="page active">
+        <div class="page-inner">
+
+            <!-- Animasi hati besar di atas -->
+            <div class="hero-heart" aria-hidden="true">❤️</div>
+
+            <!-- Teks pembuka dengan efek mengetik -->
+            <h1 class="greeting-title">
+                Haloo Raisya <span class="heart-inline">❤️</span>
+            </h1>
+            <p class="greeting-subtitle" id="typing-text"></p>
+
+            <!-- Form password -->
+            <div class="password-card" id="password-card">
+                <label for="password-input" class="input-label">
+                    🔒 Coba masukkin tanggal lahir kamu
+                </label>
+                <div class="input-wrapper">
+                    <input type="password" id="password-input" class="password-input" placeholder="Tanggal lahirmu..."
+                        autocomplete="off" maxlength="20" />
+                    <button class="toggle-pw-btn" id="toggle-pw-btn" aria-label="Tampilkan password">👁️</button>
+                </div>
+                <button class="btn-primary" id="submit-password">
+                    Submit❤️
+                </button>
+                <p class="error-msg" id="error-msg"></p>
+            </div>
+
+            <!-- Animasi hati saat berhasil (tersembunyi awalnya) -->
+            <div class="success-hearts" id="success-hearts" aria-hidden="true"></div>
+        </div>
+    </section>
+
+    <!-- =============================================
+       HALAMAN 2 — Our Memories
+  ============================================= -->
+    <section id="page-2" class="page">
+        <div class="page-inner">
+
+            <h2 class="section-title">Kenangan Kita 📸</h2>
+
+            <!-- Slideshow galeri foto -->
+            <div class="slideshow-wrapper">
+                <div class="slideshow" id="slideshow">
+                    <!-- Slide digenerate via JavaScript dari array PHOTOS di script.js -->
+                </div>
+                <!-- Dots navigasi -->
+                <div class="slide-dots" id="slide-dots"></div>
+                <!-- Tombol navigasi manual -->
+                <button class="slide-nav prev" id="slide-prev" aria-label="Sebelumnya">&#8249;</button>
+                <button class="slide-nav next" id="slide-next" aria-label="Berikutnya">&#8250;</button>
+            </div>
+
+            <!-- Kartu surat romantis -->
+            <div class="letter-card">
+                <div class="letter-header">
+                    <span class="letter-stamp">💌</span>
+                    <span class="letter-from">Dari Andre, untuk sayangkuu</span>
+                </div>
+                <!--
+          EDIT PESAN DI SINI:
+          Atau ubah variabel LETTER_MESSAGE di script.js
+        -->
+                <div class="letter-body" id="letter-body">
+                    <!-- Diisi otomatis dari script.js -->
+                </div>
+                <div class="letter-footer"> - Andre ^o^</div>
+            </div>
+
+            <!-- Tombol musik -->
+            <button class="music-btn" id="music-btn" title="Play/Pause Musik">
+                🎵
+            </button>
+            <!-- 
+        Audio romantis — ganti src dengan path file musikmu:
+        Contoh: src="music/romantic.mp3"
+        Format yang didukung: mp3, ogg, wav
+      -->
+            <audio id="bg-music" loop>
+                <source src="music/romantic.mp3" type="audio/mpeg" />
+                <!-- Fallback: gunakan URL musik online bila file lokal tidak ada -->
+            </audio>
+
+            <!-- Tombol lanjut -->
+            <button class="btn-primary next-page-btn" id="go-to-page-3">
+                Lanjut ❤️
+            </button>
+        </div>
+    </section>
+
+    <!-- =============================================
+       HALAMAN 3 — Confession (Pengakuan Cinta)
+  ============================================= -->
+    <section id="page-3" class="page night-sky">
+
+        <!-- Bintang-bintang (digenerate via JS) -->
+        <div id="stars-container"></div>
+
+        <!-- Hati melayang khusus halaman 3 -->
+        <div id="confession-hearts"></div>
+
+        <div class="page-inner confession-inner">
+
+            <!-- Pertanyaan utama -->
+            <p class="confession-sub">Aku udah lama mau bilang ini...</p>
+            <h2 class="confession-question" id="confession-question">
+                <!-- Teks diisi via JS dengan efek mengetik -->
+            </h2>
+
+            <!-- Tombol YES & NO -->
+            <div class="choice-buttons" id="choice-buttons">
+                <button class="btn-yes" id="btn-yes">YES 💖</button>
+                <button class="btn-no" id="btn-no">NO 🤍</button>
+            </div>
+
+            <!-- Pesan sukses (tersembunyi awalnya) -->
+            <div class="yes-message" id="yes-message">
+
+                <img src="assets/cat-salting.gif" alt="Kucing Salting" class="cat-gif">
+
+                <p class="yes-text">Yay! I Love U Sayanggg ❤️</p>
+                <p class="yes-subtext">Semoga ini menjadi awal cerita indah kita dan kita selalu bersama sampai
+                    kapanpun.🌸</p>
+            </div>
+
+            <!-- Pesan "butuh waktu" -->
+            <div class="wait-message" id="wait-message">
+                <p class="wait-text">Aku mengerti 🥺</p>
+                <p class="wait-subtext">Andre akan selalu ada dan nungguin ochaa 💕</p>
+            </div>
+
+            <!-- Canvas untuk confetti -->
+            <canvas id="confetti-canvas"></canvas>
+        </div>
+    </section>
+
+    <!-- Script utama -->
+    <script src="script.js"></script>
+</body>
+
+</html>

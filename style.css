@@ -1,0 +1,993 @@
+/* ================================================
+   STYLE.CSS — Romantic Website
+   Palet: Pink Pastel (#FFB6C1, #FFC0CB), Putih (#FEFEFE),
+          Ungu Muda (#E8D5F5, #C9A6E8), Aksen Mawar (#FF7BA6)
+   Font: Playfair Display (judul) + Lato (body)
+   ================================================ */
+
+/* ---------- RESET & BASE ---------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --pink-light: #FFD6E0;
+    --pink-mid: #FFB6C1;
+    --pink-deep: #FF7BA6;
+    --purple-light: #F0E6FF;
+    --purple-mid: #D4A8F0;
+    --purple-deep: #9B6DBF;
+    --white: #FEFEFE;
+    --cream: #FFF5F8;
+    --text-dark: #3D2450;
+    --text-mid: #6B4E71;
+    --text-light: #9E7EA8;
+    --shadow-soft: 0 8px 32px rgba(180, 100, 150, 0.15);
+    --shadow-glow: 0 0 20px rgba(255, 123, 166, 0.4);
+    --radius-card: 20px;
+    --radius-btn: 50px;
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Lato', sans-serif;
+    background: linear-gradient(135deg, var(--pink-light) 0%, var(--purple-light) 50%, var(--pink-light) 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: var(--text-dark);
+    overflow-x: hidden;
+}
+
+/* ---------- LAYOUT HALAMAN ---------- */
+.page {
+    display: none;
+    /* disembunyikan secara default */
+    opacity: 0;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    transition: opacity 0.6s ease;
+}
+
+.page.active {
+    display: flex;
+    /* ditampilkan saat active */
+    opacity: 1;
+}
+
+.page-inner {
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+    z-index: 2;
+}
+
+/* ---------- FLOATING HEARTS (LATAR) ---------- */
+#floating-hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.floating-heart {
+    position: absolute;
+    bottom: -60px;
+    font-size: 20px;
+    animation: floatUp linear infinite;
+    opacity: 0;
+    user-select: none;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(1);
+        opacity: 0.6;
+    }
+
+    50% {
+        transform: translateY(-45vh) rotate(15deg) scale(1.1);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-100vh) rotate(-10deg) scale(0.8);
+        opacity: 0;
+    }
+}
+
+/* ================================================
+   HALAMAN 1 — Welcome & Password
+   ================================================ */
+
+/* Hati hero besar */
+.hero-heart {
+    font-size: clamp(60px, 12vw, 100px);
+    animation: heartBeat 1.8s ease-in-out infinite;
+    filter: drop-shadow(0 4px 12px rgba(255, 100, 130, 0.4));
+}
+
+@keyframes heartBeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    14% {
+        transform: scale(1.15);
+    }
+
+    28% {
+        transform: scale(1);
+    }
+
+    42% {
+        transform: scale(1.1);
+    }
+
+    70% {
+        transform: scale(1);
+    }
+}
+
+/* Judul pembuka */
+.greeting-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 7vw, 56px);
+    font-weight: 700;
+    color: var(--text-dark);
+    text-align: center;
+    text-shadow: 0 2px 8px rgba(180, 80, 120, 0.2);
+    line-height: 1.2;
+}
+
+.heart-inline {
+    display: inline-block;
+    animation: heartBeat 1.8s ease-in-out infinite;
+}
+
+.greeting-subtitle {
+    font-size: clamp(16px, 3.5vw, 20px);
+    color: var(--text-mid);
+    text-align: center;
+    line-height: 1.7;
+    min-height: 56px;
+    /* ruang untuk efek mengetik */
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+}
+
+/* Kursor mengetik */
+.typing-cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    background: var(--pink-deep);
+    margin-left: 2px;
+    vertical-align: middle;
+    animation: blinkCursor 0.7s step-end infinite;
+}
+
+@keyframes blinkCursor {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Kartu password */
+.password-card {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(14px);
+    border: 1.5px solid rgba(255, 182, 193, 0.5);
+    border-radius: var(--radius-card);
+    padding: 36px 32px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: var(--shadow-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: var(--transition);
+}
+
+.input-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-mid);
+    letter-spacing: 0.5px;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input {
+    width: 100%;
+    padding: 14px 48px 14px 18px;
+    border: 2px solid var(--pink-mid);
+    border-radius: var(--radius-btn);
+    font-size: 16px;
+    font-family: 'Lato', sans-serif;
+    background: var(--white);
+    color: var(--text-dark);
+    outline: none;
+    transition: var(--transition);
+}
+
+.password-input:focus {
+    border-color: var(--pink-deep);
+    box-shadow: 0 0 0 3px rgba(255, 123, 166, 0.2);
+}
+
+.toggle-pw-btn {
+    position: absolute;
+    right: 14px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px;
+    line-height: 1;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.toggle-pw-btn:hover {
+    opacity: 1;
+}
+
+/* Shake animation saat password salah */
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    15% {
+        transform: translateX(-8px);
+    }
+
+    30% {
+        transform: translateX(8px);
+    }
+
+    45% {
+        transform: translateX(-6px);
+    }
+
+    60% {
+        transform: translateX(6px);
+    }
+
+    75% {
+        transform: translateX(-4px);
+    }
+
+    90% {
+        transform: translateX(4px);
+    }
+}
+
+.password-card.shake {
+    animation: shake 0.5s ease;
+    border-color: #FF6B6B;
+}
+
+/* Pesan error */
+.error-msg {
+    font-size: 13px;
+    color: #E05050;
+    text-align: center;
+    min-height: 20px;
+    font-weight: 600;
+}
+
+/* Animasi hati sukses */
+.success-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.burst-heart {
+    position: absolute;
+    font-size: 28px;
+    animation: burstFly 1.2s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes burstFly {
+    0% {
+        transform: translate(0, 0) scale(0);
+        opacity: 0;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(1.4);
+        opacity: 0;
+    }
+}
+
+/* ================================================
+   TOMBOL UTAMA (shared)
+   ================================================ */
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 36px;
+    background: linear-gradient(135deg, var(--pink-deep) 0%, var(--purple-deep) 100%);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-btn);
+    font-family: 'Lato', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(155, 109, 191, 0.35);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.5s ease, height 0.5s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow), 0 8px 25px rgba(155, 109, 191, 0.4);
+}
+
+.btn-primary:hover::after {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+/* ================================================
+   HALAMAN 2 — Memories
+   ================================================ */
+#page-2 {
+    background: linear-gradient(160deg, var(--cream) 0%, var(--purple-light) 60%, var(--pink-light) 100%);
+    background-attachment: fixed;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 6vw, 46px);
+    font-weight: 700;
+    color: var(--text-dark);
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+/* --- Slideshow --- */
+.slideshow-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 560px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(180, 100, 150, 0.2);
+    background: #fff;
+    aspect-ratio: 4 / 3;
+}
+
+.slideshow {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.slide.active-slide {
+    opacity: 1;
+    z-index: 2;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Slide placeholder (saat foto belum diisi) */
+.slide-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--pink-light), var(--purple-light));
+    color: var(--text-mid);
+    font-size: 15px;
+    gap: 12px;
+    text-align: center;
+    padding: 20px;
+}
+
+.slide-placeholder span {
+    font-size: 50px;
+}
+
+/* Caption */
+.slide-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(60, 20, 60, 0.7) 0%, transparent 100%);
+    color: var(--white);
+    padding: 24px 18px 14px;
+    font-size: 14px;
+    font-style: italic;
+    text-align: center;
+    z-index: 3;
+}
+
+/* Dots navigasi */
+.slide-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 7px;
+    z-index: 4;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    padding: 0;
+}
+
+.dot.active {
+    background: var(--white);
+    transform: scale(1.3);
+}
+
+/* Tombol navigasi prev/next */
+.slide-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    font-size: 22px;
+    cursor: pointer;
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-dark);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+    line-height: 1;
+}
+
+.slide-nav:hover {
+    background: var(--white);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.slide-nav.prev {
+    left: 10px;
+}
+
+.slide-nav.next {
+    right: 10px;
+}
+
+/* --- Kartu surat --- */
+.letter-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1.5px solid rgba(212, 168, 240, 0.4);
+    border-radius: var(--radius-card);
+    padding: 32px 36px;
+    width: 100%;
+    max-width: 560px;
+    box-shadow: var(--shadow-soft);
+    position: relative;
+}
+
+/* Efek lipatan kertas di pojok */
+.letter-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(225deg, var(--pink-light) 50%, transparent 50%);
+    border-radius: 0 var(--radius-card) 0 0;
+}
+
+.letter-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+    border-bottom: 1px dashed var(--purple-mid);
+}
+
+.letter-stamp {
+    font-size: 28px;
+    animation: swing 2s ease-in-out infinite;
+}
+
+@keyframes swing {
+
+    0%,
+    100% {
+        transform: rotate(-8deg);
+    }
+
+    50% {
+        transform: rotate(8deg);
+    }
+}
+
+.letter-from {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-light);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.letter-body {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(15px, 2.5vw, 17px);
+    color: var(--text-dark);
+    line-height: 1.9;
+    font-style: italic;
+}
+
+.letter-body p+p {
+    margin-top: 14px;
+}
+
+.letter-footer {
+    margin-top: 20px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--purple-mid);
+    font-size: 14px;
+    color: var(--text-mid);
+    font-style: italic;
+    text-align: right;
+}
+
+/* Tombol musik */
+.music-btn {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, var(--pink-deep), var(--purple-deep));
+    color: white;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(155, 109, 191, 0.5);
+    transition: var(--transition);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.music-btn:hover {
+    transform: scale(1.1);
+    box-shadow: var(--shadow-glow);
+}
+
+.music-btn.playing {
+    animation: musicPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes musicPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+.next-page-btn {
+    margin-top: 8px;
+}
+
+/* ================================================
+   HALAMAN 3 — Confession (Night Sky)
+   ================================================ */
+#page-3 {
+    background: linear-gradient(180deg, #0D0221 0%, #1A0535 40%, #2D0A4E 70%, #1A0535 100%);
+    background-attachment: fixed;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Bintang-bintang */
+#stars-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle ease-in-out infinite;
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0.2;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.4);
+    }
+}
+
+/* Hati melayang halaman 3 */
+#confession-hearts {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.confession-inner {
+    z-index: 2;
+    text-align: center;
+}
+
+.confession-sub {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(14px, 3vw, 18px);
+    color: rgba(255, 182, 213, 0.8);
+    font-style: italic;
+    margin-bottom: 8px;
+}
+
+.confession-question {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 5vw, 38px);
+    font-weight: 700;
+    color: var(--white);
+    text-align: center;
+    line-height: 1.4;
+    text-shadow: 0 0 30px rgba(255, 150, 200, 0.5);
+    min-height: 100px;
+}
+
+/* Tombol YES & NO */
+.choice-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    min-height: 140px;
+}
+
+.btn-yes {
+    padding: 16px 44px;
+    background: linear-gradient(135deg, #FF6B9E, #E040A0);
+    color: white;
+    border: none;
+    border-radius: var(--radius-btn);
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(255, 107, 158, 0.5);
+    transition: var(--transition);
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        box-shadow: 0 6px 24px rgba(255, 107, 158, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 6px 40px rgba(255, 107, 158, 0.8), 0 0 20px rgba(255, 107, 158, 0.3);
+    }
+}
+
+.btn-yes:hover {
+    transform: scale(1.06) translateY(-2px);
+}
+
+.btn-yes:active {
+    transform: scale(0.97);
+}
+
+.btn-no {
+    padding: 14px 40px;
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.8);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-btn);
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+
+    .btn-no {
+        position: relative;
+        transition: all .3s ease;
+    }
+
+    /* diposisikan untuk bisa lari */
+}
+
+.btn-no:hover {
+    border-color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Tombol "butuh waktu" */
+.btn-wait {
+    padding: 14px 30px;
+    background: rgba(180, 120, 220, 0.25);
+    color: rgba(255, 220, 255, 0.9);
+    border: 2px solid rgba(180, 120, 220, 0.5);
+    border-radius: var(--radius-btn);
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    position: static;
+    /* kembali ke posisi normal */
+}
+
+.btn-wait:hover {
+    background: rgba(180, 120, 220, 0.4);
+}
+
+/* Pesan YES */
+.yes-message {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.btn-yes,
+.btn-no {
+    transition: all .35s ease;
+}
+
+.choice-buttons {
+    position: relative;
+    min-height: 180px;
+}
+
+.btn-no {
+    position: relative;
+}
+
+.yes-message.show {
+    display: flex;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.cat-gif {
+    width: min(240px, 70vw);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(255, 150, 200, 0.4);
+}
+
+.yes-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 5vw, 36px);
+    font-weight: 700;
+    color: var(--white);
+    text-shadow: 0 0 20px rgba(255, 150, 200, 0.6);
+}
+
+.yes-subtext {
+    font-size: clamp(15px, 3vw, 20px);
+    color: rgba(255, 200, 230, 0.9);
+    font-style: italic;
+}
+
+/* Pesan "butuh waktu" */
+.wait-message {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.wait-message.show {
+    display: flex;
+}
+
+.wait-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(22px, 5vw, 32px);
+    color: var(--white);
+}
+
+.wait-subtext {
+    font-size: clamp(14px, 3vw, 18px);
+    color: rgba(220, 180, 255, 0.85);
+    font-style: italic;
+}
+
+/* Confetti canvas */
+#confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 50;
+}
+
+/* ================================================
+   RESPONSIF — Mobile
+   ================================================ */
+@media (max-width: 600px) {
+    .password-card {
+        padding: 24px 20px;
+    }
+
+    .letter-card {
+        padding: 24px 20px;
+    }
+
+    .choice-buttons {
+        min-height: 140px;
+    }
+
+    .btn-yes {
+        padding: 14px 36px;
+        font-size: 18px;
+    }
+
+    .slide-nav {
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+    }
+
+    .music-btn {
+        bottom: 16px;
+        right: 16px;
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+    }
+}
+
+/* ================================================
+   AKSESIBILITAS — reduced motion
+   ================================================ */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
